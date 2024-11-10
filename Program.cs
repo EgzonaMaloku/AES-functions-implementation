@@ -26,6 +26,7 @@ namespace AesFunctions
             AESState state = new AESState(initialState);
 
             TestByteSub(state);
+            TestShiftRows(state);
         }
 
         static void TestByteSub(AESState state)
@@ -45,6 +46,23 @@ namespace AesFunctions
             byteSub.ApplyInverseByteSub(state);
 
             PrintMatrix(state.State, "State after InverseByteSub: ");
+
+            Console.ReadKey();
+        }
+
+        static void TestShiftRows(AESState state)
+        {
+            ShiftRows shiftRows = new ShiftRows();
+
+            PrintMatrix(state.State, "Initial state: ");
+
+            shiftRows.ApplyShiftRows(state);
+
+            PrintMatrix(state.State, "State after ShiftRows: ");
+
+            shiftRows.ApplyInverseShiftRows(state);
+
+            PrintMatrix(state.State, "State after InverseShiftRows: ");
 
             Console.ReadKey();
         }

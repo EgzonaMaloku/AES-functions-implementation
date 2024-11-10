@@ -48,7 +48,7 @@
     <Compile Include="ByteSub.cs" />
     <Compile Include="AddRoundKey.cs" />
     <Compile Include="MixColumn.cs" />
-    <Compile Include="ShiftRow.cs" />
+    <Compile Include="ShiftRows.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
