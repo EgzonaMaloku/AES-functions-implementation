@@ -5,7 +5,7 @@
         public void ApplyInverseShiftRows(AESState state)
         {
             // Row 1: No shift
-            //Row 2: Shift right by 1 (as shifting left by 3)
+            //  Row 2: Shift right by 1 (as shifting left by 3)
             ShiftRow(state.State, 1, 3);
 
             // Row 3: Shift right by 2
