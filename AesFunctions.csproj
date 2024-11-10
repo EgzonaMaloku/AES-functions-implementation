@@ -43,7 +43,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AESState.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="ByteSub.cs" />
+    <Compile Include="AddRoundKey.cs" />
+    <Compile Include="MixColumn.cs" />
+    <Compile Include="ShiftRow.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

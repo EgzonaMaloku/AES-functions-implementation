@@ -1,7 +1,7 @@
 C:\Users\redon\source\repos\AesFunctions\bin\Debug\AesFunctions.exe.config
 C:\Users\redon\source\repos\AesFunctions\bin\Debug\AesFunctions.exe
 C:\Users\redon\source\repos\AesFunctions\bin\Debug\AesFunctions.pdb
-C:\Users\redon\source\repos\AesFunctions\obj\Debug\AesFunctions.csprojAssemblyReference.cache
 C:\Users\redon\source\repos\AesFunctions\obj\Debug\AesFunctions.csproj.CoreCompileInputs.cache
 C:\Users\redon\source\repos\AesFunctions\obj\Debug\AesFunctions.exe
 C:\Users\redon\source\repos\AesFunctions\obj\Debug\AesFunctions.pdb
+C:\Users\redon\source\repos\AesFunctions\obj\Debug\AesFunctions.csprojAssemblyReference.cache
