@@ -8,11 +8,6 @@ namespace AesFunctions
         {
             Console.WriteLine("Hello AES");
 
-            TestByteSub();
-        }
-
-        static void TestByteSub()
-        {
             byte[,] initialState = {
                 { 0x19, 0xA0, 0x9A, 0xE9 },
                 { 0x3D, 0xF4, 0xC6, 0xF8 },
@@ -30,6 +25,11 @@ namespace AesFunctions
 
             AESState state = new AESState(initialState);
 
+            TestByteSub(state);
+        }
+
+        static void TestByteSub(AESState state)
+        {
             ByteSub byteSub = new ByteSub();
 
             PrintMatrix(state.State, "Initial state: ");
