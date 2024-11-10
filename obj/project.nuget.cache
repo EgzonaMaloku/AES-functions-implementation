@@ -1,0 +1,24 @@
+{
+  "version": 2,
+  "dgSpecHash": "/XJHn+CE9j0O3tknkAxRIzbFAWuDB/sRMIISXJR/51frjRJH3GjqiYpas3r5FWrQh8namQd1sXulrtedpd/LZA==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\redon\\source\\repos\\AesFunctions\\AesFunctions.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\redon\\.nuget\\packages\\microsoft.net.compilers.toolset\\4.8.0\\microsoft.net.compilers.toolset.4.8.0.nupkg.sha512"
+  ],
+  "logs": [
+    {
+      "code": "NU1603",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "AesFunctions depends on Microsoft.Net.Compilers.Toolset (>= 4.7.2) but Microsoft.Net.Compilers.Toolset 4.7.2 was not found. An approximate best match of Microsoft.Net.Compilers.Toolset 4.8.0 was resolved.",
+      "libraryId": "Microsoft.Net.Compilers.Toolset",
+      "targetGraphs": [
+        ".NETFramework,Version=v4.7.2",
+        ".NETFramework,Version=v4.7.2/win",
+        ".NETFramework,Version=v4.7.2/win-x64",
+        ".NETFramework,Version=v4.7.2/win-x86"
+      ]
+    }
+  ]
+}
