@@ -27,6 +27,7 @@ namespace AesFunctions
 
             TestByteSub(state);
             TestShiftRows(state);
+            TestMixColumns(state);
         }
 
         static void TestByteSub(AESState state)
@@ -66,6 +67,25 @@ namespace AesFunctions
 
             Console.ReadKey();
         }
+
+        static void TestMixColumns(AESState state)
+        {
+            MixColumn mixColumn = new MixColumn();
+
+            PrintMatrix(state.State, "Initial state: ");
+
+            mixColumn.ApplyMixColumns(state);  
+
+            PrintMatrix(state.State, "State after MixColumns: ");
+
+            mixColumn.ApplyInverseMixColumns(state);
+
+            PrintMatrix(state.State, "State after InverseMixColumns");
+
+            Console.ReadKey();
+        }
+
+       
 
         static void PrintMatrix(byte[,] matrix, string title)
         {
