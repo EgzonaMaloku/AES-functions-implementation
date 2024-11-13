@@ -8,5 +8,16 @@ namespace AesFunctions
 {
     class AddRoundKey
     {
+
+        public void ApplyAddRoundKey(AESState state, byte[,] roundKey)
+        {
+            for (int i = 0; i < 4; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    state.State[i, j] ^= roundKey[i, j];
+                }
+            }
+        }
     }
 }

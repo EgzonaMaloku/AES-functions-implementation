@@ -4,6 +4,11 @@ namespace AesFunctions
 {
     class Program
     {
+        private static ByteSub byteSub = new ByteSub();
+        private static ShiftRows shiftRows = new ShiftRows();
+        private static MixColumn mixColumn = new MixColumn();
+        private static AddRoundKey addRoundKey = new AddRoundKey();
+
         static void Main(string[] args)
         {
             Console.WriteLine("Hello AES");
@@ -22,12 +27,62 @@ namespace AesFunctions
                 { 0x6B, 0x6C, 0x75, 0x3E }
             };
 
+            int rounds = 10;
+
 
             AESState state = new AESState(initialState);
 
-            TestByteSub(state);
-            TestShiftRows(state);
-            TestMixColumns(state);
+            PrintMatrix(state.State, "Initial state: ");
+
+            AESState encrypted = Encrypt(state, roundKey, rounds);
+
+            PrintMatrix(encrypted.State, "Encrypted state: ");
+
+            AESState decrypted = Decrypt(encrypted, roundKey, rounds);
+
+            PrintMatrix(decrypted.State, "Decrypted state: ");
+
+            Console.ReadKey();
+        }
+
+
+        static AESState Encrypt(AESState state, byte[,] roundKey, int rounds)
+        {
+            addRoundKey.ApplyAddRoundKey(state, roundKey);
+
+            for (var i = 0; i < rounds; i++)
+            {
+                byteSub.ApplyByteSub(state);
+                shiftRows.ApplyShiftRows(state);
+                if(i < rounds - 1)
+                {
+                    // ommit the last round
+                    mixColumn.ApplyMixColumns(state);
+                }
+                
+                addRoundKey.ApplyAddRoundKey(state, roundKey);
+            }
+
+            return state;
+        }
+
+        static AESState Decrypt(AESState state, byte[,] roundKey, int rounds)
+        {
+            for (var i = 0; i < rounds; i++)
+            {
+                addRoundKey.ApplyAddRoundKey(state, roundKey);
+                if(i > 0)
+                {
+                    // ommit the first round
+                    mixColumn.ApplyInverseMixColumns(state);
+                }
+                shiftRows.ApplyInverseShiftRows(state);
+                byteSub.ApplyInverseByteSub(state);
+            }
+
+            addRoundKey.ApplyAddRoundKey(state, roundKey);
+
+            return state;
         }
 
         static void TestByteSub(AESState state)
@@ -85,7 +140,23 @@ namespace AesFunctions
             Console.ReadKey();
         }
 
-       
+       static void TestRoundKey(AESState state, byte[,] roundKey)
+        {
+            AddRoundKey addRoundKey = new AddRoundKey();
+
+            PrintMatrix(state.State, "Initial state: ");
+
+            addRoundKey.ApplyAddRoundKey(state, roundKey);
+
+            PrintMatrix(state.State, "State after AddRoundKey: ");
+
+            addRoundKey.ApplyAddRoundKey(state, roundKey);
+
+            PrintMatrix(state.State, "State after Inverse AddRoundKey: ");
+
+            Console.ReadKey();
+        }
+
 
         static void PrintMatrix(byte[,] matrix, string title)
         {
