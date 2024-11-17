@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace AesFunctions
 {
@@ -11,21 +12,29 @@ namespace AesFunctions
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello AES");
+            Console.WriteLine("Enter a string to encrypt :");
 
-            byte[,] initialState = {
-                { 0x19, 0xA0, 0x9A, 0xE9 },
-                { 0x3D, 0xF4, 0xC6, 0xF8 },
-                { 0xE3, 0xE2, 0x8D, 0x48 },
-                { 0xBE, 0x2B, 0x2A, 0x08 }
-            };
+            string input = Console.ReadLine();
+
+            byte[] inputBytes = Encoding.UTF8.GetBytes(input);
+            byte[,] initialState = new byte[4, 4];
+
+            for (int i = 0; i < 4; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    int index = i * 4 + j;
+                    // Pad with zeros if input is less than 16 bytes
+                    initialState[i, j] = index < inputBytes.Length ? inputBytes[index] : (byte)0x00;
+                }
+            }
 
             byte[,] roundKey = {
-                { 0xA0, 0x88, 0x23, 0x2A },
-                { 0xFA, 0x54, 0xA3, 0x6F },
-                { 0xC3, 0x1B, 0x24, 0xF2 },
-                { 0x6B, 0x6C, 0x75, 0x3E }
-            };
+                                { 0xA0, 0x88, 0x23, 0x2A },
+                                { 0xFA, 0x54, 0xA3, 0x6F },
+                                { 0xC3, 0x1B, 0x24, 0xF2 },
+                                { 0x6B, 0x6C, 0x75, 0x3E }
+             };
 
             int rounds = 10;
 
@@ -54,12 +63,12 @@ namespace AesFunctions
             {
                 byteSub.ApplyByteSub(state);
                 shiftRows.ApplyShiftRows(state);
-                if(i < rounds - 1)
+                if (i < rounds - 1)
                 {
                     // ommit the last round
                     mixColumn.ApplyMixColumns(state);
                 }
-                
+
                 addRoundKey.ApplyAddRoundKey(state, roundKey);
             }
 
@@ -71,7 +80,7 @@ namespace AesFunctions
             for (var i = 0; i < rounds; i++)
             {
                 addRoundKey.ApplyAddRoundKey(state, roundKey);
-                if(i > 0)
+                if (i > 0)
                 {
                     // ommit the first round
                     mixColumn.ApplyInverseMixColumns(state);
@@ -129,7 +138,7 @@ namespace AesFunctions
 
             PrintMatrix(state.State, "Initial state: ");
 
-            mixColumn.ApplyMixColumns(state);  
+            mixColumn.ApplyMixColumns(state);
 
             PrintMatrix(state.State, "State after MixColumns: ");
 
@@ -140,7 +149,7 @@ namespace AesFunctions
             Console.ReadKey();
         }
 
-       static void TestRoundKey(AESState state, byte[,] roundKey)
+        static void TestRoundKey(AESState state, byte[,] roundKey)
         {
             AddRoundKey addRoundKey = new AddRoundKey();
 
