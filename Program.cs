@@ -30,14 +30,13 @@ namespace AesFunctions
             }
 
             byte[,] roundKey = {
-                                { 0xA0, 0x88, 0x23, 0x2A },
-                                { 0xFA, 0x54, 0xA3, 0x6F },
-                                { 0xC3, 0x1B, 0x24, 0xF2 },
-                                { 0x6B, 0x6C, 0x75, 0x3E }
-             };
+                        { 0xA0, 0x88, 0x23, 0x2A },
+                        { 0xFA, 0x54, 0xA3, 0x6F },
+                        { 0xC3, 0x1B, 0x24, 0xF2 },
+                        { 0x6B, 0x6C, 0x75, 0x3E }
+     };
 
             int rounds = 10;
-
 
             AESState state = new AESState(initialState);
 
@@ -50,6 +49,18 @@ namespace AesFunctions
             AESState decrypted = Decrypt(encrypted, roundKey, rounds);
 
             PrintMatrix(decrypted.State, "Decrypted state: ");
+
+            byte[] decryptedBytes = new byte[16];
+            for (int i = 0; i < 4; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    decryptedBytes[i * 4 + j] = decrypted.State[i, j];
+                }
+            }
+
+            string decryptedString = Encoding.UTF8.GetString(decryptedBytes).TrimEnd('\0');
+            Console.WriteLine("Decrypted string: " + decryptedString);
 
             Console.ReadKey();
         }
