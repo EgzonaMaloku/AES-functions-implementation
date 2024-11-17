@@ -196,13 +196,17 @@ This implementation breaks down the process into modular classes, providing clea
 **Output Encryption:**
 
 The state undergoes 10 rounds of transformations:
-* SubBytes → ShiftRows → MixColumns → AddRoundKey.*
+
+*SubBytes → ShiftRows → MixColumns → AddRoundKey.*
+
 MixColumns is omitted in the last round.
 
 **Output Decryption:**
 
 Reverses the encryption steps in reverse order:
+
 *InverseMixColumns → InverseShiftRows → InverseByteSub → AddRoundKey.*
+
 MixColumns is omitted in the first round.
 
 ## Contributors
